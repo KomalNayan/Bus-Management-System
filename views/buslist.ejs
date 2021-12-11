@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Bus List</title>
+<style>
+body{
+  font-family: arial;
+  align-content: center;
+}
+table,th,td{
+  border: 2px solid black;
+  text-align: center;
+  padding: 15px;
+}
+th{
+  background-color: bisque;
+}
+table{
+  border-collapse: collapse;
+}
+.bookBtn{
+  padding: 10px;
+  border: 2px solid black;
+  color: black;
+  background-color: white;
+  transition: 0.4s ease-in-out;
+}
+.bookBtn:hover{
+color:white;
+background-color: black;
+}
+h1{
+  text-align: center;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <h1>List of Buses &nbsp;&nbsp;<a href="/add"><i class="fa fa-plus" style="color:blue; font-size: 40px;" aria-hidden="true"></i></a></h1>
+  <section data-position="buses">
+  <center>
+  <table>
+    <tr><th>Bus Number</th><th>Source</th><th>Destination</th>
+        <th>Departure Time</th><th>Arrival Time</th><th>Action</th>
+    </tr>
+    <% for (var i=0;i<allthebuses.length;i++){ %>
+    <tr>
+        <td><%= allthebuses[i].busno %></td>
+        <td><%= allthebuses[i].source %></td>
+        <td><%= allthebuses[i].destination %></td>
+        <td><%= allthebuses[i].departuretime %></td>
+        <td><%= allthebuses[i].arrivaltime %></td>
+        <td><a href="/book/<%= allthebuses[i]._id %>"><i class="fa fa-ticket" style="color:black; font-size: 25px;" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="/delete/<%= allthebuses[i]._id %>"><i class="fa fa-trash" style="color:red; font-size: 25px;" aria-hidden="true"></i></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/edit/<%= allthebuses[i]._id %>"><i class="fa fa-pencil" style="color:green; font-size: 25px;" aria-hidden="true"></i></a>
+      </td>
+    </tr>
+    <% } %>
+  </table>
+  </center>
+  </section>
+</body>
+</html>

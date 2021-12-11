@@ -1,0 +1,157 @@
+<html>
+    <head>
+        <title>Edit Bus</title>
+        <style>
+            body{
+                    font-family: arial;
+                }
+                .bookBtn{
+                        padding: 10px;
+                        border: 2px solid black;
+                        color: black;
+                        background-color: white;
+                        transition: 0.4s ease-in-out;
+                        }
+                .bookBtn:hover{
+                color:white;
+                background-color: black;
+                }
+                h1{
+                    text-align: center;
+                }
+                input[type=text]{
+                    height: 30px;
+                }
+                .error{
+                    color: red;
+                    text-align: end;
+                }
+        </style>
+    </head>
+    <body onload="clearErrors()">
+        <h1>Changing Wheels!!</h1>
+        <center>
+        <form action="/buses/edit/<%= bus._id%>" method="POST">
+        <table cellspacing="30">
+            <tr>
+                <td>Bus Number</td>
+                <td><input type="text" name="busno" id="busno" placeholder="Enter Bus Number" value="<%= bus.busno%>" required onchange="validateBusNo()"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><p id="busNoError" class="error"></p></td>
+            </tr>
+            <tr>
+                <td>Source</td>
+                <td><input type="text" name="source" id="source" placeholder="Enter Source" value="<%= bus.source%>" required onchange="validateSource()"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><p id="sourceError" class="error"></p></td>
+            </tr>
+            <tr>
+                <td>Destination</td>
+                <td><input type="text" name="destination" id="destination" placeholder="Enter Destination" value="<%= bus.destination%>" onchange="validateDestination()" required/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><p id="destinationError" class="error"></p></td>
+            </tr>
+            <tr>
+                <td>Departure Time (24hr Format - HH:MM)</td>
+                <td><input type="text" name="departuretime" id="departuretime" placeholder="Enter Departure Time" value="<%= bus.departuretime%>" onchange="validateDeptTime()" required/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><p id="deptTimeError" class="error"></p></td>
+            </tr>
+            <tr>
+                <td>Arrival Time (24hr Format - HH:MM)</td>
+                <td><input type="text" name="arrivaltime" id="arrivaltime" placeholder="Enter Arrival Time" value="<%= bus.arrivaltime%>" onchange="validateArvTime()" required/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><p id="arvTimeError" class="error"></p></td>
+            </tr>
+            <tr>
+                <td colspan="3"><center><input type="submit" class="bookBtn" value="Update Bus"/></center></td>
+            </tr>
+        </table>
+        </form>
+        </center>
+        <script>
+            function clearErrors()
+            {
+                document.getElementById("busNoError").innerHTML ="";
+                document.getElementById("sourceError").innerHTML ="";
+                document.getElementById("deptTimeError").innerHTML ="";
+                document.getElementById("arvTimeError").innerHTML ="";
+                document.getElementById("destinationError").innerHTML ="";
+            }
+
+            //for Bus Number Validation
+            function validateBusNo()
+            {
+                var busNo = document.getElementById("busno").value;
+                if(isNaN(busNo[0]))
+                {
+                    document.getElementById("busNoError").innerHTML ="Bus Number should begin with a number";
+                }
+                else{
+                    document.getElementById("busNoError").innerHTML="";
+                }
+            }
+
+            //for Sources Validation
+            function validateSource()
+            {
+                var src = document.getElementById("source").value;
+                if(src.length < 8)
+                {
+                    document.getElementById("sourceError").innerHTML ="Source Name cannot have less than 8 characters";
+                }
+                else{
+                    document.getElementById("sourceError").innerHTML="";
+                }
+            }
+
+             //for Destination Validation
+             function validateDestination()
+            {
+                var dest = document.getElementById("destination").value;
+                if(dest.length < 8)
+                {
+                    document.getElementById("destinationError").innerHTML ="Destination Name cannot have less than 8 characters";
+                }
+                else{
+                    document.getElementById("destinationError").innerHTML="";
+                }
+            }
+
+             //for Departure Time Validation
+             function validateDeptTime()
+            {
+                var time = document.getElementById("departuretime").value;
+                var hrs = parseInt(time.slice(0,2));
+                var mins = parseInt(time.slice(3,5));
+                if(hrs<0 || hrs>23 || mins<0 || mins>59 || time[2]!=':')
+                {
+                    document.getElementById("deptTimeError").innerHTML ="Invalid Time/Time Format";
+                }
+                else{
+                    document.getElementById("deptTimeError").innerHTML="";
+                }
+            }
+
+             //for Arrival Time Validation
+             function validateArvTime()
+            {
+                var time = document.getElementById("arrivaltime").value;
+                var hrs = parseInt(time.slice(0,2));
+                var mins = parseInt(time.slice(3,5));
+                if(hrs<0 || hrs>23 || mins<0 || mins>59 || time[2]!=':')
+                {
+                    document.getElementById("arvTimeError").innerHTML ="Invalid Time/Time Format";
+                }
+                else{
+                    document.getElementById("arvTimeError").innerHTML="";
+                }
+            }
+        </script>
+    </body>
+</html>

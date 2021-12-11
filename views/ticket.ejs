@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>
+            Your Ticket
+        </title>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            h1{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="border: 2px solid black; width: 50%; margin-left: 25%;margin-right: 25%;text-align: center;">
+        <h1>-------------------Ticket-------------------</h1>
+        <p><b>Date :</b> <%= new Date().toISOString().slice(0,10); %></p>
+        <p><b>Bus Number :</b> <%= bus.busno%></p>
+        <p><b>Source : </b><%= bus.source%></p>
+        <p><b>Destination :</b> <%= bus.destination%></p>
+        <p><b>Departs At :</b> <%= bus.departuretime%></p>
+        <p><b>Arrives At :</b> <%= bus.arrivaltime%></p>
+        <p><b>Ticket Fare :</b> $<%= (Math.random() * (50 - 3) + 3).toFixed(2) %></p>
+        </div>
+        <br>
+        <br>
+        <p style="color:red; text-align: center;"> Screenshot this page and show it at the boarding point for entry.</p>
+    </body>
+</html>
